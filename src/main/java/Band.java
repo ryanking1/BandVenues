@@ -44,7 +44,7 @@ public class Band {
     }
   }
 
-  public static Stylist find(int id) {
+  public static Band find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM bands where id=:id";
       Band Band = con.createQuery(sql)
@@ -56,7 +56,7 @@ public class Band {
 
   public List<Venue> getVenues() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM bands where venueId=:id";
+      String sql = "SELECT * FROM venues where bandId=:id";
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetch(Venue.class);

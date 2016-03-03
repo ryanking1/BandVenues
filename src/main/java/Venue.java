@@ -14,17 +14,17 @@ public class Venue {
     return name;
   }
 
-  public int getVenueId() {
-    return venueId;
+  public int getBandId() {
+    return bandId;
   }
 
-  public Venu(String name, int bandId) {
+  public Venue(String name, int bandId) {
     this.name = name;
     this.bandId = bandId;
   }
 
   public static List<Venue> all() {
-    String sql = "SELECT * FROM venuess";
+    String sql = "SELECT * FROM venues";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Venue.class);
     }

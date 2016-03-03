@@ -1,3 +1,19 @@
 index.vtl
 
 <h1>Band List:</h1>
+
+#foreach($band in $bands)
+<h4><a href="/$band.getId()">$band.getName()</a>
+
+  <form action="/delete/band/$band.getId()" method="post">
+  <button type="submit" id="$band.getId()" name="deleteBand" class="btn btn-danger">
+    Delete Band</button></h4>
+  </form>
+#end
+
+
+<form action="/" method="post">
+  <label for="">Add a Band</label>
+  <input type="text" name="bandName" id="bandName" required>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
