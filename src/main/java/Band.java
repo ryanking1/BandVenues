@@ -63,6 +63,17 @@ public class Band {
     }
   }
 
+  public void update(String name) {
+    this.name = name;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE bands SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
   public static void deleteBand(int id) {
       String sql = "DELETE FROM bands WHERE id=:id";
       try(Connection con = DB.sql2o.open()) {
@@ -71,4 +82,13 @@ public class Band {
         .executeUpdate();
       }
   }
+
+  public static void deleteAll(int id) {
+      String sql = "DELETE FROM bands";
+      try(Connection con = DB.sql2o.open()) {
+        con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
+    }
 }

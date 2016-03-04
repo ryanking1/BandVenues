@@ -72,5 +72,25 @@ public class App {
       model.put("template", "templates/addVenue.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/:id/update", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Band band = Band.find(Integer.parseInt(request.queryParams("bandId")));
+      String newName = request.queryParams("updateBand");
+      band.update(newName);
+      List<Venue> venues = band.getVenues();
+      model.put("venues", venues);
+      model.put("band", band);
+      model.put("template", "templates/addVenue.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/index", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Band.deleteAll(0);
+      model.put("bands", Band.all());
+      model.put("template", "templates/deleteBands.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
