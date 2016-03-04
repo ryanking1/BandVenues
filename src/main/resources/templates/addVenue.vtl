@@ -6,21 +6,21 @@ addVenue.vtl
   #foreach($venue in $venues)
     <li>$venue.getName()</li>
     <form action="/delete/venue/$venue.getId()" method="post">
-    <input id="bandId" name="bandId" type=hidden value="$band.getId()">
+    <input id="bandId" name="bandId" type="hidden" value="$band.getId()">
     <button type="submit" id="$venue.getId()" name="$venue.getId()" class="btn btn-danger">
       Delete Venue</button>
     </form>
   #end
 </ul>
 
-<form action="/:id" method="post">
+<form action="/$venue.getId()" method="post">
   <input id="bandId" name="bandId" type=hidden value="$band.getId()">
   <label>Add a Venue</label>
   <input type="text" name="venueName" id="venueName" required>
   <button type="submit" name="AddVenueButton" class="btn btn-info">Submit</button>
 </form>
 
-<form action="/:id/update" method="post">
+<form action="/$venue.getId()/update" method="post">
   <input id="bandId" name="bandId" type=hidden value="$band.getId()">
   <label>Change Band Name</label>
   <input type="text" name="updateBand" id="updateBand" required>

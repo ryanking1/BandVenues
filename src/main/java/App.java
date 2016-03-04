@@ -49,8 +49,8 @@ public class App {
 
     post("/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      Band band = Band.find(Integer.parseInt(request.queryParams("bandId")));
       int id = Integer.parseInt(request.queryParams("bandId"));
+      Band band = Band.find(id);
       String venueName = request.queryParams("venueName");
       Venue newVenue = new Venue(venueName, id);
       newVenue.save();
@@ -85,12 +85,10 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/index", (request, response) -> {
-      HashMap<String, Object> model = new HashMap<String, Object>();
-      Band.deleteAll(0);
-      model.put("bands", Band.all());
-      model.put("template", "templates/deleteBands.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
+    post("/index/delete", (request, response) -> {
+      Band.deleteAll();
+      response.redirect("/");
+      return null;
+  });
   }
 }

@@ -83,11 +83,10 @@ public class Band {
       }
   }
 
-  public static void deleteAll(int id) {
+  public static void deleteAll() {
       String sql = "DELETE FROM bands";
       try(Connection con = DB.sql2o.open()) {
         con.createQuery(sql)
-        .addParameter("id", id)
         .executeUpdate();
       }
     }
